@@ -1,0 +1,31 @@
+{
+  "presets": [
+    ["@babel/preset-env", {
+      "targets": {
+        "browsers": "defaults"
+      },
+      "modules": false,
+      "useBuiltIns": "usage",
+      "shippedProposals": true
+    }],
+    ["@babel/preset-react", {
+      "useBuiltIns": true
+    }]
+  ],
+  "plugins": [
+    ["@babel/plugin-transform-runtime", {
+      "polyfill": false,
+      "useBuiltIns": true
+    }],
+    "react-hot-loader/babel"
+  ],
+  "env": {
+    "development": {
+      "presets": [
+        ["@babel/preset-react", {
+          "development": true
+        }]
+      ]
+    }
+  }
+}
