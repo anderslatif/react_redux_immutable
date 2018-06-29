@@ -15,6 +15,9 @@ import { StaticRouter } from 'react-router'
 import { LOG_FORMAT } from 'server/settings'
 
 import Root from 'components/root'
+import {configureStore} from '../store/configureStore';
+import initialStoreState from '../store/initialStoreState'
+import {Provider} from 'react-redux/dist/react-redux';
 
 const assetsManifest = JSON.parse(
   fs.readFileSync(
@@ -32,12 +35,19 @@ app.use(staticGzip('public', { indexFromEmptyFile: false }))
 app.use('/assets', staticGzip('build/client', { indexFromEmptyFile: false }))
 
 app.get('*', (req, res) => {
-  const routerContext = {}
+    const cookies = {"token": "just showing how it would work with thunk helpers"};
+    const store = configureStore(initialStoreState, { cookies });
+
+    const routerContext = {
+      store
+    }
   const markup = renderToString(
     <StaticRouter
       context={routerContext}
       location={req.url}>
-      <Root />
+        <Provider store={store}>
+            <Root />
+        </Provider>
     </StaticRouter>
   )
 
@@ -67,7 +77,10 @@ app.get('*', (req, res) => {
         </head>
         <body>
           <div id="root">${markup}</div>
-          <script src="${assetsManifest.index.js}" defer></script>
+          <script src="${assetsManifest.index.js}" defer>
+                // http://redux.js.org/recipes/ServerRendering.html#security-considerations
+                window.__PRELOADED_STATE__ = ${JSON.stringify(store.getState()).replace(/</g, '\\\u003c')}
+        </script>
         </body>
       </html>
     `)

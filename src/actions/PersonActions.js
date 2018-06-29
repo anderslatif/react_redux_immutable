@@ -1,4 +1,4 @@
-import {PersonConstants} from '../constants/PersonConstants';
+import * as PersonConstants from '../constants/PersonConstants';
 
 
 export function addPerson(person) {
@@ -10,11 +10,10 @@ export function addPerson(person) {
     };
 }
 
-export function removePerson(person) {
+export function removePerson() {
     return async (dispatch, getState, {cookies}) => {
         dispatch({
             type: PersonConstants.REMOVE_PERSON,
-            person: person
         });
     };
 }

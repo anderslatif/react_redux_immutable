@@ -6,3 +6,5 @@ const initialStoreState = fromJS({
         count: 0
     }
 });
+
+export default initialStoreState;
