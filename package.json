@@ -14,6 +14,7 @@
     "@babel/runtime": "^7.0.0-beta.44",
     "common-tags": "^1.7.2",
     "express-static-gzip": "^0.3.2",
+    "immutable": "^3.8.2",
     "normalize.css": "^8.0.0",
     "prop-types": "^15.6.1",
     "raf": "^3.4.0",
@@ -22,6 +23,10 @@
     "react-hot-loader": "^4.1.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+    "redux": "^4.0.0",
+    "redux-devtools-extension": "^2.13.5",
+    "redux-immutable": "^4.0.0",
+    "redux-thunk": "^2.3.0",
     "serve-favicon": "^2.5.0",
     "source-map-support": "^0.5.4"
   },
